@@ -41,7 +41,7 @@ function SingleNote({note}) {
                     {loadingDelete && <Loading/>}
                     {errorDelete && <ErrorMessage>{errorDelete}</ErrorMessage>}
                     <div>
-                        <Button><Link to={`/note/${note._id}`}>Edit</Link> </Button>
+                        <Button style={{marginLeft:"15px"}}><Link to={`/note/${note._id}`}>Edit</Link> </Button>
                         <Button 
                             variant="danger"
                             className="mx-2"

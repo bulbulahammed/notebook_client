@@ -38,8 +38,8 @@ function SingleNote({note}) {
                             {note.title}
                         </Accordion.Header>
                     </span>
-                    {loadingDelete && <Loading/>}
-                    {errorDelete && <ErrorMessage>{errorDelete}</ErrorMessage>}
+                    {loadingDelete ? <Loading/> :undefined}
+                    {errorDelete ? <ErrorMessage>{errorDelete}</ErrorMessage> : undefined}
                     <div>
                         <Button style={{marginLeft:"15px"}}><Link to={`/note/${note._id}`}>Edit</Link> </Button>
                         <Button 

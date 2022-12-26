@@ -1,3 +1,7 @@
+.profile-header {
+  text-align: center;
+  margin-top: 80px;
+}
 .profilePic {
   width: 60%;
   display: flex;

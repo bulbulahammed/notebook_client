@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from "../../components/ErrorMessage";
@@ -7,19 +8,14 @@ import Loading from "../../components/loading/Loading";
 import { updateProfile } from "../../redux/actions/userActions";
 import "./Profile.css";
 
-const Profile = ({ location }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pic, setPic] = useState();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [picMessage, setPicMessage] = useState();
+const Profile = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const [updatedUserData,setUpdatedUserData] = useState({userInfo});
 
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, error, success } = userUpdate;
@@ -27,98 +23,76 @@ const Profile = ({ location }) => {
   useEffect(() => {
     if (!userInfo) {
       navigate("/");
-    } else {
-      setName(userInfo.name);
-      setEmail(userInfo.email);
-      setPic(userInfo.pic);
-    }
+    } 
   }, [navigate, userInfo]);
 
-  const postDetails = (pics) => {
-    setPicMessage(null);
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      const data = new FormData();
-      data.append("file", pics);
-      data.append("upload_preset", "notebook");
-      data.append("cloud_name", "dp9psbgjh");
-      fetch("https://api.cloudinary.com/v1_1/dp9psbgjh/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setPic(data.url.toString());
-          console.log(pic);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      return setPicMessage("Please Select an Image");
-    }
+
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedUserData({ ...updatedUserData, [name]: value });
   };
+  
+  const {name,email,password,pic} = updatedUserData;
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     dispatch(updateProfile({ name, email, password, pic }));
+    console.log(updatedUserData);
   };
 
   return (
       <>
-        <h2>Update Your Profile</h2>
+        <h2 className="profile-header">Update Your Profile</h2>
         <Row className="profileContainer">
             <Col md={6}>
               <Form onSubmit={submitHandler}>
-                 {loading && <Loading/>}
-                 {success && (<ErrorMessage variant="success">Update Successfully</ErrorMessage>)}
-                 {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+                 {loading ? <Loading/> :  undefined}
+                 {success ? (<ErrorMessage variant="success">Update Successfully</ErrorMessage>) : undefined}
+                 {error ? <ErrorMessage variant="danger">{error}</ErrorMessage> : undefined}
                  {/*------------ Name------------ */}
-                 <Form.Group>
+                 <Form.Group controlId="name">
                  <Form.Label>Name</Form.Label>
                     <Form.Control
                     type="text"
-                    placeholder="Enter Name"
+                    name="name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    placeholder={userInfo?.name}
+                    onChange={onInputChange}
                     ></Form.Control>
                  </Form.Group>
-                 {/* -----------------Email--------------- */}
-                 <Form.Group controlId="email">
-                    <Form.Label>Email Address</Form.Label>
-                    <Form.Control
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>
+                {/* --------------Password------------------ */}
+                <Form.Group controlId="email" className="mb-3">
+                <Form.Label>Email address</Form.Label>
+                  <Form.Control 
+                      type="email"
+                      value={email}
+                      name="email" 
+                      placeholder={userInfo.email}
+                      onChange={onInputChange} 
+                  />
+              </Form.Group>
                 {/* --------------Password------------------ */}
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                     type="password"
-                    placeholder="Enter Password"
+                    name="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Input New Password"
+                    onChange={onInputChange}
                     ></Form.Control>
                 </Form.Group>
-                {/* ----------------Confirm Password---------- */}
-                <Form.Group controlId="confirmPassword">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    ></Form.Control>
-                </Form.Group>{" "}
-                {picMessage && (
-                    <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
-                )}
                 {/* -----------------Pic------------- */}
-                {/* TODO: Implement Update Profile Picture */}
-
+                <Form.Group>
+                  <Form.Label>Profile Picture</Form.Label>
+                  <FileBase
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) =>
+                        setUpdatedUserData({ ...updatedUserData, pic: base64 })
+                      }
+                      />
+                </Form.Group>
                 <Button type="submit" varient="primary" style={{marginTop:"10px"}}>
                 Update
               </Button>
@@ -132,7 +106,7 @@ const Profile = ({ location }) => {
               justifyContent: "center",
             }}
           >
-            <img src={pic} alt={name} className="profilePic" />
+            <img src={userInfo?.pic} alt="Profile" className="profilePic" />
           </Col>
         </Row>
       </>

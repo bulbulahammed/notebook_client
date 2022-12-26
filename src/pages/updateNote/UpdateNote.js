@@ -64,10 +64,10 @@ const  UpdateNote = ({match})=> {
         <Card.Header style={{textAlign:"center",textTransform:"uppercase",fontWeight:"bold"}}>Edit Your Note</Card.Header>
         <Card.Body>
           <Form onSubmit={handleUpdate}>
-            {loading && <Loading></Loading>}
-            {loadingDelete && <Loading></Loading>}
-            {error && <ErrorMessage>{error}</ErrorMessage>}
-            {errorDelete && <ErrorMessage>{error}</ErrorMessage>}
+            {loading ? <Loading></Loading>: undefined}
+            {loadingDelete ? <Loading></Loading>: undefined}
+            {error ? <ErrorMessage>{error}</ErrorMessage>: undefined}
+            {errorDelete ? <ErrorMessage>{error}</ErrorMessage>: undefined}
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
@@ -91,14 +91,14 @@ const  UpdateNote = ({match})=> {
             </Form.Group>
 
 
-            {content && (
+            {content ? (
               <Card>
                 <Card.Header>Note Preview</Card.Header>
                 <Card.Body>
                   <ReactMarkdown>{content}</ReactMarkdown>
                 </Card.Body>
               </Card>
-            )}
+            ) : undefined}
 
               <Form.Group controlId="content">
               <Form.Label>Category</Form.Label>
@@ -110,8 +110,8 @@ const  UpdateNote = ({match})=> {
               />
             </Form.Group>
 
-            {loadingDelete && <Loading></Loading>}
-            {errorDelete && <ErrorMessage>{error}</ErrorMessage>}
+            {loadingDelete ? <Loading></Loading>: undefined}
+            {errorDelete ? <ErrorMessage>{error}</ErrorMessage>: undefined}
             <div style={{marginTop:"20px",textAlign:"center"}}>
               <Button variant="primary" type="submit">
                 Update Note

@@ -38,7 +38,7 @@ function CreateNote() {
             <Card.Header style={{textAlign:"center",textTransform:"uppercase",fontWeight:"bold"}}>Create A New Note Page</Card.Header>
             <Card.Body>
                 <Form onSubmit={handleSubmit}>
-                    {error && <ErrorMessage>{error}</ErrorMessage>}
+                    {error ? <ErrorMessage>{error}</ErrorMessage> : undefined}
                     <Form.Group controlId='title'>
                         <Form.Label>Title</Form.Label>
                         <Form.Control
@@ -57,14 +57,14 @@ function CreateNote() {
                            onChange={(e)=>setContent(e.target.value)}
                         />
                     </Form.Group>
-                    {content &&(
+                    {content ? (
                         <Card>
                             <Card.Header>Note Preview</Card.Header>
                             <Card.Body>
                                 <ReactMarkdown>{content}</ReactMarkdown>
                             </Card.Body>
                         </Card>
-                    )}
+                    ) : undefined}
                     <Form.Group controlId='category'>
                         <Form.Label>Category</Form.Label>
                         <Form.Control
@@ -74,7 +74,7 @@ function CreateNote() {
                           onChange={(e)=>setCategory(e.target.value)}
                         />
                     </Form.Group>
-                    {loading &&<Loading/>}
+                    {loading ? <Loading/> : undefined}
                     <div style={{marginTop:"20px",textAlign:"center"}}>
                         <Button type="submit" variant="primary">Create Note</Button>
                         <Button className='mx-2' variant='danger' onClick={handleReset}>Reset</Button>

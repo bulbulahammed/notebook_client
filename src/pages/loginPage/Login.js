@@ -37,8 +37,8 @@ function Login() {
                 <h2>Login</h2>
                 <hr/>
             </div>
-            {error && <ErrorMessage>{error}</ErrorMessage>}
-            {loading && <Loading/>}
+            {error ? <ErrorMessage>{error}</ErrorMessage> : undefined}
+            {loading ? <Loading/> : undefined}
             <Form onSubmit={submitHandler}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>

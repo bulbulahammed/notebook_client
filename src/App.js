@@ -15,7 +15,6 @@ import UpdateNote from './pages/updateNote/UpdateNote';
 
 function App() {
   const [search,setSearch] = useState();
-  console.log(search);
   return (
     <>
       <Header setSearch={setSearch}></Header>

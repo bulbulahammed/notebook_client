@@ -49,15 +49,10 @@ function MyNotes({search}) {
             </Link>
 
             {/* If there is Error Show the Error message */}
-            {error && <ErrorMessage>{error}</ErrorMessage>}
+            {error ? <ErrorMessage>{error}</ErrorMessage> : undefined}
             
             {/* If the state is Loading Show Loading component */}
-            {loading && <Loading/>}
-            {/* {
-               notes &&
-                notes.map(note=><SingleNote note={note} key={note._id}/>)
-            } */}
-
+            {loading ? <Loading/> : undefined}
             {
               search? notes && notes.filter((filteredNote)=>
               filteredNote.title.toLowerCase().includes(search.toLowerCase())).map(note=><SingleNote note={note} key={note._id}/>) : notes && notes.map(note=><SingleNote note={note} key={note._id}/>)

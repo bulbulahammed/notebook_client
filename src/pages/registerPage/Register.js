@@ -43,7 +43,6 @@ function Register() {
       
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(userData);
         if (name && email && password && pic) { 
           dispatch(register(name, email, password, pic));
           } else setMessage("Fill All The Field");

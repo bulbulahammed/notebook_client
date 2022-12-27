@@ -24,8 +24,6 @@ function Login() {
 
     const submitHandler = async(e)=>{
         e.preventDefault();
-        console.log(email,password);
-
         dispatch(login(email,password))
     }
 

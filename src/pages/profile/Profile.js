@@ -37,7 +37,6 @@ const Profile = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(updateProfile({ name, email, password, pic }));
-    console.log(updatedUserData);
   };
 
   return (
@@ -67,7 +66,7 @@ const Profile = () => {
                       type="email"
                       value={email}
                       name="email" 
-                      placeholder={userInfo.email}
+                      placeholder={userInfo?.email}
                       onChange={onInputChange} 
                   />
               </Form.Group>
@@ -93,10 +92,7 @@ const Profile = () => {
                       }
                       />
                 </Form.Group>
-                <Button type="submit" varient="primary" style={{marginTop:"10px"}}>
-                Update
-              </Button>
-
+                <Button type="submit" varient="primary" style={{marginTop:"10px"}}>Update</Button>
               </Form>
             </Col>
             <Col

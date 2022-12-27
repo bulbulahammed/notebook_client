@@ -23,13 +23,12 @@ import {
       };
   
       const { data } = await axios.post(
-        "http://localhost:5000/api/users/login",
-        { email, password },
+        "https://notebookserver.up.railway.app/api/users/login",
+        { email, password},
         config
       );
   
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-      console.log(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
@@ -50,7 +49,7 @@ import {
 
 
   
-export const register = (name, email, password, pic,surname) => async (dispatch) => {
+export const register = (name, email, password, pic) => async (dispatch) => {
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
   
@@ -61,8 +60,8 @@ export const register = (name, email, password, pic,surname) => async (dispatch)
       };
   
       const { data } = await axios.post(
-        "http://localhost:5000/api/users",
-        { name, pic, email, password,surname},
+        "https://notebookserver.up.railway.app/api/users",
+        { name, pic, email, password},
         config
       );
   
@@ -95,7 +94,7 @@ export const register = (name, email, password, pic,surname) => async (dispatch)
         },
       };
   
-      const { data } = await axios.post("http://localhost:5000/api/users/profile", user, config);
+      const { data } = await axios.post("https://notebookserver.up.railway.app/api/users/profile", user, config);
   
       dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
   

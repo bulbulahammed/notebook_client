@@ -17,7 +17,6 @@ function CreateNote() {
 
     const noteCreate = useSelector((state)=>state.noteCreate);
     const {loading,error,note} = noteCreate;
-    console.log(note);
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -27,7 +26,6 @@ function CreateNote() {
         navigate("/myNotes");
     }
     const handleReset = () =>{
-        console.log("Someone Reset The Form");
         setTitle("");
         setContent("");
         setCategory("");

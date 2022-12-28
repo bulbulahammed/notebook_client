@@ -57,8 +57,8 @@ function Header({setSearch}) {
                             height="25"
                             style={{ marginRight: 10 }}
                           />
+                          My Profile
                         </Link>
-                    My Profile
                   </NavDropdown.Item>
 
                   <NavDropdown.Divider />

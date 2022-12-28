@@ -11,7 +11,7 @@ import './singleNote.css';
 function SingleNote({note}) {
   const dispatch = useDispatch();
   const noteDelete = useSelector((state)=> state.noteDelete);
-  const {loading:loadingDelete, error:errorDelete, success:successDelete} = noteDelete;
+  const {loading:loadingDelete, error:errorDelete} = noteDelete;
 
         const handleDelete =(id)=>{
             if (window.confirm("Are you sure?")) {

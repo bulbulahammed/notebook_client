@@ -1,11 +1,11 @@
 import axios from "axios";
 import {
-  USER_LOGIN_FAIL,
-  USER_LOGIN_REQUEST,
-  USER_LOGIN_SUCCESS,
-  USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS, USER_UPDATE_FAIL, USER_UPDATE_REQUEST,
-  USER_UPDATE_SUCCESS
+    USER_LOGIN_FAIL,
+    USER_LOGIN_REQUEST,
+    USER_LOGIN_SUCCESS,
+    USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST,
+    USER_REGISTER_SUCCESS, USER_UPDATE_FAIL, USER_UPDATE_REQUEST,
+    USER_UPDATE_SUCCESS
 } from "../constants/userConstants";
 
 
@@ -23,7 +23,7 @@ import {
       };
   
       const { data } = await axios.post(
-        "https://notebookserver.up.railway.app/api/users/login",
+        "https://notebook-server-bulbulahammed.vercel.app/api/users/login",
         { email, password},
         config
       );
@@ -60,7 +60,7 @@ export const register = (name, email, password, pic) => async (dispatch) => {
       };
   
       const { data } = await axios.post(
-        "https://notebookserver.up.railway.app/api/users",
+        "https://notebook-server-bulbulahammed.vercel.app/api/users",
         { name, pic, email, password},
         config
       );
@@ -94,7 +94,7 @@ export const register = (name, email, password, pic) => async (dispatch) => {
         },
       };
   
-      const { data } = await axios.post("https://notebookserver.up.railway.app/api/users/profile", user, config);
+      const { data } = await axios.post("https://notebook-server-bulbulahammed.vercel.app/api/users/profile", user, config);
   
       dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
   

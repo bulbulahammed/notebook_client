@@ -25,7 +25,7 @@ import {
         },
       };
   
-      const { data } = await axios.get(`https://notebookserver.up.railway.app/api/notes`, config);
+      const { data } = await axios.get(`https://notebook-server-bulbulahammed.vercel.app/api/notes`, config);
   
       dispatch({
         type: NOTES_LIST_SUCCESS,
@@ -64,7 +64,7 @@ export const createNoteAction =
     };
 
     const { data } = await axios.post(
-      "https://notebookserver.up.railway.app/api/notes/create",
+      "https://notebook-server-bulbulahammed.vercel.app/api/notes/create",
       { title, content, category },
       config
     );
@@ -109,7 +109,7 @@ export const updateNoteAction = (id, title, content, category) => async (
     };
 
     const { data } = await axios.put(
-      `https://notebookserver.up.railway.app/api/notes/${id}`,
+      `https://notebook-server-bulbulahammed.vercel.app/api/notes/${id}`,
       { title, content, category },
       config
     );
@@ -153,7 +153,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`https://notebookserver.up.railway.app/api/notes/${id}`, config);
+    const { data } = await axios.delete(`https://notebook-server-bulbulahammed.vercel.app/api/notes/${id}`, config);
 
     dispatch({
       type: NOTES_DELETE_SUCCESS,

@@ -35,7 +35,7 @@ const  UpdateNote = ({match})=> {
   
    useEffect(()=>{
     const fetching = async () =>{
-      const {data} = await axios.get(`https://notebookserver.up.railway.app/notes/${id}`);
+      const {data} = await axios.get(`https://notebook-server-bulbulahammed.vercel.app/notes/${id}`);
 
       setTitle(data.title);
       setContent(data.content);
